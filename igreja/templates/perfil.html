@@ -1,0 +1,20 @@
+{% extends 'login.html' %}
+
+{% block title %}
+ Profile - {{ user.capitalize() }}
+{% endblock %}
+
+{% block messages %}
+<!-- esse bloco fica fazio para a mensagem nao aparecer no topo, apenas dentro do menu -->
+{% endblock %}
+
+{% block body %}
+
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <!-- inicio conteudo aqui -->
+        <h2>Meu nome é {{ current_user.nickname }}!</h2>
+        <!-- fim conteudo aqui -->
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'perfil.html' %}
+
+{% block title %}
+ Membros
+{% endblock %}
+
+{% block body %}
+
+    {% include 'navbar.html' %}
+
+    <div class="container">
+
+        <div class="row mt-4">
+            <div class="col-md-6 verticalLine">
+
+                <h3 class="mb-4">Lista de Membros</h3>
+
+                <table id="members" class="display">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for num in range(25) %}
+                        <tr>
+                            <td>Tiger Nixon {{ num }}</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61{{num}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+            <div class="col-md-6">
+                <h3 class="mb-4">Cadastrar membros</h3>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- scripts page members -->
+<script src="https://cdn.datatables.net/v/dt/dt-3.0.1/datatables.min.js" integrity="sha384-4KvBx+ygRyZ/XBcprEmKhIFo1BLD5rDlrEQvevVh0Rw32ZXTvv6RzbWTkTyzvJYK" crossorigin="anonymous"></script>
+<script>
+// Initialise a DataTable
+const table = new DataTable('#members', {
+    // Options
+    responsive: true,
+    lengthMenu: [5, 10, 15, 20, 25, -1],
+    language: {
+        emptyTable: 'Sem dados disponíveis na tabela',
+        info: 'Mostrando _START_ a _END_ de _TOTAL_ membros',
+        infoFiltered: "(filtrado de total de _MAX_ membros)",
+        infoEmpty: 'Nenhum membro disponível',
+        search: 'Buscar:',
+        zeroRecords: 'Nada encontrado',
+        lengthMenu: "_MENU_Exibir Membros por página",
+    }
+});
+</script>
+{% endblock %}

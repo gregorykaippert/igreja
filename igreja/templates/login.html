@@ -1,0 +1,59 @@
+{% extends 'register.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block subtitle %}
+    <h2>Login</h2>
+{% endblock %}
+
+{% block form %}
+ <form method="post" id="login" class="php-email-form">
+    {{ form.csrf_token }}
+    <div class="row">
+      <div class="col-md-6 form-group">
+        {{ form.email.label(for="email") }}
+          {% if not form.email.errors %}
+            {{ form.email(class="form-control", placeholder="Email", autocomplete="email") }}
+          {% else %}
+            {{ form.email(class="form-control", style="color:red; border-bottom: 1px solid color-mix(in srgb, #f22005, #ef0606 80%)", autocomplete="email") }}
+            <span style="color:red">{{ form.email.errors[0] }}</span>
+          {% endif %}
+      </div>
+      <div class="col-md-6 form-group">
+          {{ form.password.label(for="password") }}
+          {% if not form.password.errors %}
+            {{ form.password(class="form-control", placeholder="Password", autocomplete="password") }}
+          {% else %}
+              {{ form.password(class="form-control", style="color:red; border-bottom: 1px solid color-mix(in srgb, #f22005, #ef0606 80%)", autocomplete="password") }}
+              <span style="color:red">{{ form.password.errors[0] }}</span>
+          {% endif %}
+      </div>
+    </div>
+
+    <div class="my-3">
+      <div class="loading">Loading</div>
+      <div class="error-message"></div>
+      <div class="sent-message">Your message has been sent. Thank you!</div>
+    </div>
+
+    <div class="form-footer">
+        {{ form.button_login(class="input-submit") }}
+        <a href="{{url_for('register')}}">
+            {% if form.email.errors %}
+                <div class="input-submit-error piscando">Registrar</div>
+            {% else %}
+                <div class="input-submit">Registrar</div>
+            {% endif %}
+        </a>
+      <div class="social-links">
+        <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </form>
+
+{% endblock %}

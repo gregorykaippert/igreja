@@ -38,11 +38,8 @@ def register():
 
 @app.route("/contact")
 def contact():
-    users = User.query.all()
-    return render_template("contact.html", users=users)
-    for user in users:
-        print(user.nickname)
-    return 'ok'
+    users = User.query.filter_by(nickname='Greg').first()
+    return users.nickname
 
 @app.route("/about")
 def about():

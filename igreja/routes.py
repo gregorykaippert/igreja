@@ -40,7 +40,7 @@ def register():
 def contact():
     users = User.query.filter_by(nickname='Greg').first()
     users.admin = 0
-<<<<<<< HEAD
+
 
     users = User.query.filter_by(nickname='Gregory').first()
     users.admin = 1
@@ -48,10 +48,10 @@ def contact():
     database.session.commit()
 
     return render_template("contact.html", users=users)
-=======
-    database.session.commit()
-    return str(users.id)
->>>>>>> ab0544f677c71ce6981e83d35893c2ca8be0b198
+
+    # database.session.commit()
+    # return str(users.id)
+
 
 @app.route("/about")
 def about():

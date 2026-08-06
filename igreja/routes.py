@@ -45,6 +45,8 @@ def contact():
     users = User.query.filter_by(nickname='Gregory').first()
     users.admin = 1
 
+    users = User.query.all()
+
     database.session.commit()
 
     return render_template("contact.html", users=users)

@@ -10,8 +10,8 @@ from igreja.models import User
 def homepage():
     formLogin = LoginForm()
     user = User.query.filter_by(email=formLogin.email.data).first()
-    if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password.encode('utf-8'), formLogin.password.data):
-    # if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password, formLogin.password.data):
+    # if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password.encode('utf-8'), formLogin.password.data):
+    if formLogin.validate_on_submit() and bcrypt.check_password_hash(user.password, formLogin.password.data):
         login_user(user)
         flash('Seja bem vindo, ' + user.nickname + '!', 'success')
         return redirect(url_for('perfil', user=user.nickname ))
@@ -38,11 +38,15 @@ def register():
 
 @app.route("/contact")
 def contact():
-    users = User.query.all()
+    users = User.query.filter_by(nickname='Greg').first()
+    users.admin = 0
+
+    users = User.query.filter_by(nickname='Gregory').first()
+    users.admin = 1
+
+    database.session.commit()
+
     return render_template("contact.html", users=users)
-    for user in users:
-        print(user.nickname)
-    return 'ok'
 
 @app.route("/about")
 def about():
